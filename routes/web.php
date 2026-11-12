@@ -15,7 +15,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('categories', CategoryController::class)->except('create', 'show', 'edit');
     Route::get('pos', [PosController::class, 'index'])->name('pos.index');
     Route::post('checkout', [CheckoutController::class, 'store'])->name('checkout');
-    // Route::get('receipt/{sale}', [CheckoutController::class, 'receipt'])->name('receipt');
+    Route::get('receipt/{sale}', [CheckoutController::class, 'receipt'])->name('receipt');
 });
 
 require __DIR__.'/settings.php';
