@@ -40,9 +40,9 @@ export default function ProductGrid({ products, onAdd }: Props) {
                         </div>
                     )}
                         <div className='p-2'>
-                                <p className="truncate text-sm font-medium">{product.name}</p>
-                                <p className="text-sm font-bold text-primary">${product.price}</p>
-                                <p className="text-xs text-muted-foreground">Stock: {product.stock}</p>
+                            <p className="truncate text-sm font-medium">{product.name}</p>
+                            <p className="text-sm font-bold text-primary">${product.price}</p>
+                            <p className="text-xs text-muted-foreground">Stock: {product.stock}</p>
                         </div>
                     </button>
                 ))}
