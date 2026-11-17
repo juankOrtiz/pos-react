@@ -4,18 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
-use Illuminate\Http\RedirectResponse;
 use App\Models\Cliente;
+use App\Models\Province;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 
 class ClienteController extends Controller
 {
     public function index()
     {
-        $clientes = Cliente::orderBy('nombre')->get();
+        $clientes = Cliente::with('provincia')->orderBy('nombre')->get();
+        $provincias = Province::orderBy('nombre')->get();
 
         return Inertia::render('clientes/index', [
             'clientes' => $clientes,
+            'provincias' => $provincias,
         ]);
     }
 

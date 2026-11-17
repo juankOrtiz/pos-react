@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('direccion');
-            $table->string('provincia');
+            $table->foreignId('province_id')->references('id')->on('provinces');
             $table->string('codigo_postal');
             $table->string('telefono')->nullable();
             $table->softDeletes();

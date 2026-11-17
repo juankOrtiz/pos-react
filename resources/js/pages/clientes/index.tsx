@@ -1,5 +1,5 @@
 import { Head, router } from '@inertiajs/react';
-import { Cliente } from "@/types";
+import { Provincia, Cliente } from "@/types";
 import { useState } from "react";
 import { toast } from 'sonner';
 import { Pencil, Plus, Trash2 } from 'lucide-react';
@@ -8,9 +8,10 @@ import ClienteForm from "./cliente-form";
 
 interface Props {
     clientes: Cliente[];
+    provincias: Provincia[];
 }
 
-export default function ClienteIndex({ clientes }: Props){
+export default function ClienteIndex({ clientes, provincias }: Props){
     const [ShowForm, setShowForm] = useState(false);
     const [editing, setEditing] = useState<Cliente | null>(null);
 
@@ -66,7 +67,7 @@ export default function ClienteIndex({ clientes }: Props){
                                 <tr key={cliente.id} className="border-b last:border-0 hover:bg-muted/25">
                                     <td className="px-4 py-3 font-medium">{cliente.nombre}</td>
                                     <td className="px-4 py-3 text-muted-foreground">{cliente.direccion}</td>
-                                    <td className="px-4 py-3 text-right">{cliente.provincia}</td>
+                                    <td className="px-4 py-3 text-right">{cliente.provincia.nombre}</td>
                                     <td className="px-4 py-3 text-right">{cliente.codigo_postal}</td>
                                     <td className="px-4 py-3 text-right">{cliente.telefono}</td>
                                     <td className="px-4 py-3 text-right">
@@ -86,6 +87,7 @@ export default function ClienteIndex({ clientes }: Props){
             {
                 ShowForm && (
                     <ClienteForm
+                        provincias={provincias}
                         cliente={editing}
                         onClose={handleClose}
                     />

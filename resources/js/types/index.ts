@@ -47,7 +47,13 @@ export interface Cliente {
     id: number;
     nombre: string;
     direccion: string;
-    provincia: string;
+    province_id: number;
     codigo_postal: number;
     telefono: string;
+    provincia: Provincia;
+}
+
+export interface Provincia {
+    id: number;
+    nombre: string;
 }

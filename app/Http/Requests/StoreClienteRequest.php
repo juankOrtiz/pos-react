@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class StoreClienteRequest extends FormRequest
 {
@@ -26,7 +25,7 @@ class StoreClienteRequest extends FormRequest
         return [
             'nombre' => ['required', 'string', 'max:255'],
             'direccion' => ['required', 'string', 'max:255'],
-            'provincia' => ['required', 'string', Rule::in(['Misiones', 'Corrientes', 'Entre Rios', 'Buenos Aires'])],
+            'province_id' => ['required', 'exists:provinces,id'],
             'codigo_postal' => ['required', 'numeric', 'min:1000', 'max:9000'],
             'telefono' => ['required', 'string', 'min:8', 'max:15'],
         ];

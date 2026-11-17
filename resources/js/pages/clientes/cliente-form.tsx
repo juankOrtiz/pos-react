@@ -1,4 +1,4 @@
-import { Category, Cliente } from "@/types";
+import { Provincia, Cliente } from "@/types";
 import { useForm } from "@inertiajs/react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -10,15 +10,16 @@ import { FormEvent } from "react";
 import { toast } from "sonner";
 
 interface Props {
+    provincias: Provincia[];
     cliente?: Cliente | null;
     onClose: () => void;
 }
 
-export default function ClienteForm({ cliente, onClose }: Props) {
+export default function ClienteForm({ provincias, cliente, onClose }: Props) {
     const { data, setData, post, put, processing, errors, reset } = useForm({
         nombre:         cliente?.nombre ?? '',
         direccion:      cliente?.direccion ?? '',
-        provincia:      cliente?.provincia ?? '',
+        province_id:   cliente?.province_id?.toString() ?? '',
         codigo_postal:  cliente?.codigo_postal?.toString() ?? '0',
         telefono:       cliente?.telefono ?? '',
     });
@@ -58,9 +59,16 @@ export default function ClienteForm({ cliente, onClose }: Props) {
 
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <Label htmlFor="provincia">Provincia</Label>
-                            <Input id="provincia" value={data.provincia} onChange={e => setData('provincia', e.target.value)} />
-                            <InputError message={errors.provincia} />
+                            <Label>Provincia</Label>
+                            <Select value={data.province_id} onValueChange={v => setData('province_id', v)}>
+                                <SelectTrigger><SelectValue placeholder="Select provincia" /></SelectTrigger>
+                                <SelectContent>
+                                    {provincias.map(c => (
+                                        <SelectItem key={c.id} value={c.id.toString()}>{c.nombre}</SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                            <InputError message={errors.province_id} />
                         </div>
                         <div>
                             <Label htmlFor="codigo_postal">Codigo Postal</Label>

@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-#[Fillable('nombre', 'direccion', 'provincia', 'codigo_postal', 'telefono')]
+#[Fillable('nombre', 'direccion', 'province_id', 'codigo_postal', 'telefono')]
 class Cliente extends Model
 {
     use SoftDeletes;
 
     public function provincia(): BelongsTo
     {
-        return $this->belongsTo(Province::class);
+        return $this->belongsTo(Province::class, 'province_id');
     }
 }
