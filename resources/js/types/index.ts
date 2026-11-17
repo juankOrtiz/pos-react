@@ -42,3 +42,12 @@ export interface Sale {
     created_at: string;
     items: SaleItem[];
 }
+
+export interface Cliente {
+    id: number;
+    nombre: string;
+    direccion: string;
+    provincia: string;
+    codigo_postal: number;
+    telefono: string;
+}
